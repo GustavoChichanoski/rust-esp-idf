@@ -1,0 +1,26 @@
+version: "0.2"
+ignorePaths:
+  - .gitignore
+  - target
+  - .cargo
+dictionaryDefinitions: []
+dictionaries:
+  - en
+  - pt_BR
+ignoreWords: []
+import: []
+words:
+  - appeui
+  - appkey
+  - appskey
+  - codegen
+  - devaddr
+  - deveui
+  - Everynet
+  - lorawan
+  - maccommands
+  - nwkskey
+  - OTAA
+  - serde
+  - Subband
+  - tcxo

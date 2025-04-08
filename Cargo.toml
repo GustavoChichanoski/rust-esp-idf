@@ -1,0 +1,94 @@
+[package]
+name = "ciadiesel-rust-esp-idf"
+version = "0.1.0"
+authors = ["Gustavo Chichanoski <monkeymikase@gmail.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+# Esp Sections
+esp-alloc = { version = "0.6" }
+esp-backtrace = { version = "0.15", features = [
+    "panic-handler",
+    "exception-handler",
+    "esp32",
+    "println",
+] }
+esp-hal = { version = "0.23.1", features = ["__esp_hal_embassy", "esp32"] }
+esp-hal-embassy = { version = "0.6.0", features = ["log", "esp32"] }
+esp-println = { version = "0.13.0", features = ["defmt-espflash", "esp32"] }
+esp-storage = { version = "0.4.0", features = ["esp32"] }
+esp-wifi = { version = "0.12.0", features = ["esp32", "wifi", "utils"] }
+
+# Embassy sections
+embassy-executor = { version = "0.7", features = ["task-arena-size-40960"] }
+embassy-futures = "0.1.1"
+embassy-sync = "0.6"
+embassy-net = { version = "0.6.0", features = [
+    "tcp",
+    "udp",
+    "dns",
+    "log",
+    "dhcpv4",
+    "medium-ethernet",
+] }
+embassy-time = { version = "0.4.0", features = ["generic-queue-32"] }
+embassy-time-driver = "0.2.0"
+
+# Embedded sections
+embedded-io = "0.6"
+embedded-io-async = "0.6"
+embedded-graphics = "0.8.1"
+embedded-hal-async = "1.0.0"
+embedded-can = "0.4.1"
+embedded-storage = "0.3.1"
+embedded-hal = "1.0.0"
+
+# others
+reqwless = { version = "0.13.0" }
+static_cell = { version = "2.1", features = ["nightly"] }
+ssd1306 = { git = "https://github.com/rust-embedded-community/ssd1306.git", features = [
+    "async",
+] }
+qrcodegen-no-heap = { version = "1.8.1" }
+nmea0183 = "0.5.0"
+log = { version = "0.4" }
+heapless = { version = "0.8", default-features = false }
+smoltcp = { version = "0.12.0", default-features = false, features = [
+    "medium-ethernet",
+    "socket-raw",
+] }
+smoltcp-nal = "0.6.0"
+fugit = "0.3.7"
+defmt = "0.3.10"
+embedded-hal-bus = { version = "0.3.0", features = ["async"] }
+
+# lorawan
+lorawan-device = { git = "https://github.com/lora-rs/lora-rs.git", features = [
+    "defmt-03",
+    "default-crypto",
+    "embassy-time",
+    "serde",
+] }
+lora-modulation = { git = "https://github.com/lora-rs/lora-rs.git", features = [
+    "defmt-03",
+    "serde",
+] }
+lorawan-encoding = { git = "https://github.com/GustavoChichanoskiFK/lora-rs.git", default-features = false }
+embassy-embedded-hal = { version = "0.3.0", features = ["defmt"] }
+lora-phy = { git = "https://github.com/lora-rs/lora-rs.git", features = ["defmt-03", "lorawan-radio"] }
+
+[profile.dev.package.esp-storage]
+opt-level = 3
+
+[profile.dev]
+opt-level = 2
+
+[profile.release]
+codegen-units = 1
+debug = 2
+debug-assertions = true
+incremental = false
+lto = 'fat'
+opt-level = 3
+overflow-checks = false

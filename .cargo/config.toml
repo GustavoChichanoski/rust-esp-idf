@@ -1,0 +1,29 @@
+[target.xtensa-esp32-none-elf]
+runner = "espflash flash --chip esp32 --monitor -L defmt"
+
+[env]
+ESP_LOG = "INFO"
+SSID = "AP1005_2.4G"
+PASSWORD = "chichanoski"
+URL = "http://192.168.1.3:8090"
+RUST_BACKTRACE = "full"
+TELEGRAM_TOKEN = "5693984292:AAGwA8Xg5lYC-CnIZiBKNSKMUyYygApmo_s"
+TELEGRAM_CHAT_ID = "6106304859"
+
+[build]
+rustflags = [
+    "-C",
+    "link-arg=-Tlinkall.x",
+    "-C",
+    "link-arg=-nostartfiles",
+    "-C",
+    "link-arg=-Tdefmt.x",
+    # "-C",
+    # "link-arg=-Trom_functions.x",
+    # "-C",
+    # "link-arg=-Tmemory.x",
+]
+target = "xtensa-esp32-none-elf"
+
+[unstable]
+build-std = ["alloc", "core"]
